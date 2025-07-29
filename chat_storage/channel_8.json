@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "channel_id": 8,
+        "username": "jo",
+        "message": "hi",
+        "timestamp": 1753745483,
+        "created_at": "2025-07-28T23:31:23+00:00"
+    },
+    {
+        "id": 2,
+        "channel_id": 8,
+        "username": "juan",
+        "message": "hola",
+        "timestamp": 1753746825,
+        "created_at": "2025-07-28T23:53:45+00:00"
+    },
+    {
+        "id": 3,
+        "channel_id": 8,
+        "username": "hola",
+        "message": "hi",
+        "timestamp": 1753747073,
+        "created_at": "2025-07-28T23:57:53+00:00"
+    },
+    {
+        "id": 4,
+        "channel_id": 8,
+        "username": "hola",
+        "message": "hi",
+        "timestamp": 1753747464,
+        "created_at": "2025-07-29T00:04:24+00:00"
+    },
+    {
+        "id": 5,
+        "channel_id": 8,
+        "username": "Anonymous",
+        "message": "Hello! This is a test message from the chat system.",
+        "timestamp": 1753750793,
+        "created_at": "2025-07-29T00:59:53+00:00"
+    }
+]
