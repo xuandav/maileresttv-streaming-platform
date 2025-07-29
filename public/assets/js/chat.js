@@ -95,6 +95,30 @@ function loadMessages() {
     });
 }
 
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Convert emoji shortcodes to Unicode emojis
+function convertEmojis(text) {
+    const emojiMap = {
+        ':smile:': '😄',
+        ':laughing:': '😆',
+        ':blush:': '😊',
+        ':heart:': '❤️',
+        ':thumbsup:': '👍',
+        ':clap:': '👏',
+        ':fire:': '🔥',
+        ':sob:': '😭',
+        ':wink:': '😉',
+        ':grin:': '😁',
+        // Add more emoji mappings as needed
+    };
+    return text.replace(/:\w+:/g, match => emojiMap[match] || match);
+}
+
 // Mostrar mensajes
 function displayMessages(messages) {
     const chatContainer = document.getElementById('simple-chat-messages');
@@ -114,40 +138,40 @@ function displayMessages(messages) {
     }
     
     // Agregar mensajes
-        messages.forEach(message => {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'simple-message';
-            
-            // Calcular tiempo transcurrido
-            const timeAgo = getTimeAgo(message.created_at);
-            
-            let deleteButtonHtml = '';
-            // Mostrar botón eliminar si es admin (simulado con variable isAdmin)
-            if (window.isAdmin) {
-                deleteButtonHtml = `<button class="delete-btn" data-message-id="${message.id}" title="Eliminar mensaje">🗑️</button>`;
-            }
-            
-            messageDiv.innerHTML = `
-                <span class="simple-username">${escapeHtml(message.username)}</span>
-                <span class="simple-text">${escapeHtml(message.message)}</span>
-                <span class="simple-time" data-timestamp="${message.created_at}">${timeAgo}</span>
-                ${deleteButtonHtml}
-            `;
-            
-            chatContainer.appendChild(messageDiv);
-        });
-
-        // Añadir event listeners para botones eliminar
+    messages.forEach(message => {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'simple-message';
+        
+        // Calcular tiempo transcurrido
+        const timeAgo = getTimeAgo(message.created_at);
+        
+        let deleteButtonHtml = '';
+        // Mostrar botón eliminar si es admin (simulado con variable isAdmin)
         if (window.isAdmin) {
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const messageId = this.getAttribute('data-message-id');
-                    if (confirm('¿Estás seguro de eliminar este mensaje?')) {
-                        deleteChatMessage(messageId);
-                    }
-                });
-            });
+            deleteButtonHtml = `<button class="delete-btn" data-message-id="${message.id}" title="Eliminar mensaje">🗑️</button>`;
         }
+        
+        messageDiv.innerHTML = `
+            <span class="simple-username">${escapeHtml(message.username)}</span>
+            <span class="simple-text">${convertEmojis(escapeHtml(message.message))}</span>
+            <span class="simple-time" data-timestamp="${message.created_at}">${timeAgo}</span>
+            ${deleteButtonHtml}
+        `;
+        
+        chatContainer.appendChild(messageDiv);
+    });
+
+    // Añadir event listeners para botones eliminar
+    if (window.isAdmin) {
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const messageId = this.getAttribute('data-message-id');
+                if (confirm('¿Estás seguro de eliminar este mensaje?')) {
+                    deleteChatMessage(messageId);
+                }
+            });
+        });
+    }
     
     // Desplazar hacia abajo
     chatContainer.scrollTop = chatContainer.scrollHeight;
