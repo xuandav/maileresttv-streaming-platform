@@ -1,6 +1,6 @@
 <?php
-require_once '../includes/db_connect.php';
-require_once '../includes/functions.php';
+require_once __DIR__ . '/../includes/db_connect.php';
+require_once __DIR__ . '/../includes/functions.php';
 
 // Get channel from URL - handle both old and new SEO-friendly URLs
 $channel = null;
@@ -55,14 +55,12 @@ error_log("DEBUG: Final channel: " . $channel['name'] . " (ID: " . $channelId . 
 
 $pageTitle = $channel['name'];
 
-require_once '../includes/header.php';
+require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <main class="live-page">
     <div class="main-layout">
-        <aside class="side-menu">
-            <?php include '../includes/side_menu.php'; ?>
-        </aside>
+        <?php include __DIR__ . '/../includes/side_menu.php'; ?>
         <section class="content-area">
             <div class="container live-container">
                 <!-- Currently Playing Channel and Suggested Channels Carousel -->
@@ -496,4 +494,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<?php require_once '../includes/footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
