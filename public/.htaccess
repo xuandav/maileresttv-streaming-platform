@@ -1,0 +1,25 @@
+RewriteEngine On
+
+# If the request is directly for a file or directory, serve it as is
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# SEO-friendly URLs for live channels
+# Pattern: /en-vivo/canal-slug (without ID)
+RewriteRule ^en-vivo/([a-z0-9\-]+)/?$ live.php?channel_slug=$1 [L,QSA]
+
+# SEO-friendly URLs for categories
+# Pattern: /categoria/category-name
+RewriteRule ^categoria/([a-z0-9\-]+)/?$ index.php?category=$1 [L,QSA]
+
+# SEO-friendly URLs for countries
+# Pattern: /pais/country-name
+RewriteRule ^pais/([a-z0-9\-]+)/?$ index.php?country=$1 [L,QSA]
+
+# SEO-friendly URLs for search
+# Pattern: /buscar/search-term
+RewriteRule ^buscar/([a-z0-9\-]+)/?$ index.php?search=$1 [L,QSA]
+
+# Custom 404 error page
+ErrorDocument 404 /404.php
