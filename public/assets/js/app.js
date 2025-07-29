@@ -7,12 +7,60 @@ function toggleSideMenu() {
     }
 }
 
+// Initialize mobile menu functionality
+function initializeMobileMenu() {
+    const menuToggleBtn = document.getElementById('side-menu-toggle');
+    const sideMenu = document.querySelector('.side-menu');
+    
+    if (menuToggleBtn && sideMenu) {
+        // Toggle menu when button is clicked
+        menuToggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sideMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside (on mobile)
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 1024) {
+                if (!sideMenu.contains(event.target) && !menuToggleBtn.contains(event.target)) {
+                    sideMenu.classList.remove('active');
+                }
+            }
+        });
+        
+        // Close menu when clicking on menu links (mobile)
+        const sideMenuLinks = document.querySelectorAll('.side-menu a');
+        sideMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 1024) {
+                    sideMenu.classList.remove('active');
+                }
+            });
+        });
+        
+        // Close menu on window resize if switching to desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                sideMenu.classList.remove('active');
+            }
+        });
+        
+        // Handle escape key to close menu
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && sideMenu.classList.contains('active')) {
+                sideMenu.classList.remove('active');
+            }
+        });
+    }
+}
+
 // Initialize app when DOM is loaded
 function initializeApp() {
     initializeFilters();
     initializeSearch();
     initializeModals();
     initializeChannelCards();
+    initializeMobileMenu();
 }
 
 // Filter functionality for channels
