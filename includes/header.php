@@ -12,31 +12,21 @@
     <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
 </head>
 <body>
-    <header class="site-header new-header">
-        <div class="header-left">
-            <button class="menu-toggle" aria-label="Abrir menú lateral">☰</button>
-            <a href="/index.php" class="logo-link">
-                <img src="/assets/images/logo.png" alt="<?php echo SITE_NAME; ?>" class="logo-img" />
-                <span class="logo-text"><?php echo SITE_NAME; ?></span>
-            </a>
+    <header class="site-header minimalist-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <button id="side-menu-toggle" class="side-menu-toggle">Menu</button>
+                    <a href="/index.php" class="logo-link">
+                        <img src="/assets/images/logo.png" alt="<?php echo SITE_NAME; ?>" class="logo-img" />
+                        <span class="logo-text"><?php echo SITE_NAME; ?></span>
+                    </a>
+                </div>
+                <div class="header-center">
+                    <input type="search" placeholder="Buscar videos, canales y en vivo" class="search-input" />
+                </div>
+            </div>
         </div>
-        <div class="header-center">
-            <input type="search" placeholder="Puede buscar videos, canales y en vivo." class="search-input" />
-        </div>
-        <div class="header-right">
-            <button class="btn-creator-studio">Creator Studio</button>
-            <button class="btn-add">+</button>
-            <button class="btn-profile" aria-label="Perfil de usuario"></button>
-        </div>
-        <nav class="submenu">
-            <ul>
-                <li class="submenu-item active"><a href="#">TOP 100</a></li>
-                <li class="submenu-item"><a href="#">drama</a></li>
-                <li class="submenu-item"><a href="#">Diversión</a></li>
-                <li class="submenu-item"><a href="#">deportivo</a></li>
-                <li class="submenu-item"><a href="#">noticia</a></li>
-            </ul>
-        </nav>
     </header>
 </body>
 </html>
